@@ -45,7 +45,67 @@ Then use this command to confirm Microsoft.Graph has been installed: Get-Install
 
 Then log in to Microsoft.Graph using this command: Connect-MgGraph -Scopes "User.ReadWrite.All". Your browser will open and you will be prompted to sign-in. Use the Administrator account to connect. Accept the permissions request; then close the browser window.
 
-Use this command to verify that you're connected and can see existing users: Get-MgUser 
+Use this command to verify that you're connected and can see existing users: Get-MgUser: 
+
+<img width="1592" height="1044" alt="image" src="https://github.com/user-attachments/assets/97d91d55-6aea-424b-a09d-4afd92704ff9" />
+
+Use this command to assign a temporary strong password to users: 
+
+$PWProfile = @{
+    Password = "<Enter a complex password you will>";
+    ForceChangePasswordNextSignIn = $false
+}
+Use this command to create a new user: 
+
+New-MgUser `
+    -DisplayName "New PW User" `
+    -GivenName "New" -Surname "User" `
+    -MailNickname "newuser" `
+    -UsageLocation "US" `
+    -UserPrincipalName "newuser@<tenantname.com>" `
+    -PasswordProfile $PWProfile -AccountEnabled `
+    -Department "Research" -JobTitle "Trainer"
+
+   Note: "<tenantname.com>" is a placeholder that should be replaced with an actual verified tenant, as shown below: 
+
+   <img width="1595" height="611" alt="image" src="https://github.com/user-attachments/assets/cc062e10-3151-4f86-bcad-a257d3a4c492" />
+
+**How to remove a user on Microsoft Entra ID. **
+
+On the Entra ID homepage, browse to Users > All Users > Select the user you want to delete, which is ChrisGreen in this case" > select Delete > Yes
+
+<img width="489" height="219" alt="image" src="https://github.com/user-attachments/assets/2e93a2a1-29d9-43bb-a3fd-7a5fe38a577d" />
+
+To restore a deleted user, go to Deleted users on the Users page > select the user you want to restore > select Restore users from the ellipsis dropdown:  
+
+<img width="780" height="370" alt="image" src="https://github.com/user-attachments/assets/b80c4a4e-f61c-478a-b860-ceda6291ec3f" />
+
+**How to add a Windows licence to a user.** 
+
+The first step is identifying the unlicensed user in your organization. This is because the assigned license of some users will be unable to access some products or may need an update to access products. To find an unlicensed user, navigate to All users > search for a particular user (Raul Razo in this case) > click the profile > licenses. Ensure the user (Raul) has "No license agreement" on their profile, as shown below:
+
+<img width="1605" height="921" alt="image" src="https://github.com/user-attachments/assets/427b605a-ad73-46a2-aee5-cabfa5d2b94e" />
+
+To assign a Windows license, go to the [Microsoft 365 admin center](https://admin.microsoft.com.) and sign in with your admin account > In the left navigation menu, select Billing, and then select Licenses > Select the product you want to assign from the list. For this lab, Windows 10/11 Enterprise E3 was the product I used: 
+
+<img width="1588" height="943" alt="image" src="https://github.com/user-attachments/assets/0d5f4dde-0bfb-4cf9-8b69-35c86bdd4ee6" />
+
+On the new page, select Assigned Licenses, then add the user and indicate the subscription, then click Assign Licenses: 
+
+<img width="1180" height="835" alt="image" src="https://github.com/user-attachments/assets/a9ceceae-f6ee-4297-956b-8126f2a5757e" /> 
+
+After license has been assigned: 
+
+<img width="1188" height="375" alt="image" src="https://github.com/user-attachments/assets/3065acae-4ccf-4728-9ca1-59dbdaefe2b7" />
+
+Verify the license by going to the user's profile: 
+
+<img width="1177" height="848" alt="image" src="https://github.com/user-attachments/assets/9f6b7b91-ee3e-4793-8fa5-296ef8b8138b" />
+
+
+
+
+
 
 
 
